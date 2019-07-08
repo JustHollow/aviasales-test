@@ -1,0 +1,32 @@
+
+.buy--ticket {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	padding: 25px 20px;
+	justify-content: center;
+	text-align: center;
+	&-logo {
+		img {
+			max-width: 120px;
+			max-height: 35px;
+		}
+		padding-bottom: 20px;
+	}
+	.buy--button {
+		width: 160px;
+		max-height: 56px;
+		background-color: #ff6d00;
+		border: none;
+		box-shadow: 0 1px #d64d08;
+		border-radius: 5px;
+		padding: 6px 38.5px;
+		color: #fff;
+		font-size: 16px;
+		font-weight: 600;
+		&:hover {
+			background-color: #ff8124;
+			box-shadow: 0 1px #f7661d;
+		}
+	}
+}

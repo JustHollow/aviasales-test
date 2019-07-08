@@ -1,0 +1,39 @@
+$blue: #2196f3;
+$border: #d2d5d6;
+
+.currency-buttons {
+	max-height: 40px;
+	max-width: 68px;
+	position: relative;
+	border: 1px solid $border;
+	background-color: white;
+	padding: 9px 21px;
+
+	font-size: 12px;
+	color: $blue;
+	font-weight: 600;
+	line-height: 22px;
+	text-align: center;
+	text-transform: uppercase;
+
+	&-active {
+		background-color: $blue;
+		border-color: $blue;
+		color: white;
+	}
+	&:first-child {
+		border-radius: 5px 0 0 5px;
+	}
+	&:not(:first-child) {
+		margin-left: -1px;
+	}
+	&:last-child {
+		border-radius: 0 5px 5px 0;
+	}
+	&:hover:not(&-active) {
+		z-index: 2;
+		border: 1px solid #64b5f5;
+		background-color: #f2fcff;
+		color: $blue;
+	}
+}

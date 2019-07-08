@@ -1,0 +1,25 @@
+$blue: #2196f3;
+
+.checkbox-item {
+    display: flex;
+    flex-direction: row;
+    &:hover {
+        background-color: #f1fcff;
+        .only-button {
+            visibility: visible;
+        }
+    }
+    .only-button {
+        visibility: hidden;
+        margin-right: 0;
+        margin-left: auto;
+        color: $blue;
+        border: none;
+        background-color: transparent;
+        font-weight: 600;
+        cursor: pointer;
+        &:hover{
+            background-color: #e2f5fa;
+        }
+    }
+}
