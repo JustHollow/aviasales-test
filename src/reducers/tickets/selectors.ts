@@ -2,6 +2,7 @@ import { RootState } from "reducers";
 import { createSelector } from "reselect";
 import { CurrencyTypes } from "./constants";
 import { ISERVER_Tickets, ISERVER_Ticket } from "data/tickets-typing";
+import { FindMaxInArrayOfObjects } from "utils/utilFunctions";
 
 type TTicketStore = ReturnType<typeof TicketsStoreSelector>;
 export const TicketsStoreSelector = (state: RootState) => state.tickets;
@@ -15,11 +16,23 @@ export const CurrencyRatesSelector = (state: RootState) =>
 export const TicketStopsSelector = (state: RootState) =>
 	TicketsStoreSelector(state).TicketStops;
 
+export const MaxTicketStopsSelector = createSelector(
+	[TicketsSelector],
+	Tickets => FindMaxInArrayOfObjects({ arr: Tickets, key: "stops" }) + 1
+);
+
 export const TicketWithCurrencySelector = createSelector(
-	[TicketsSelector, CurrentCurrencySelector, CurrencyRatesSelector,TicketStopsSelector],
-	(Tickets, CurrentCurrency, CurrencyRates,TicketStops) => {
-		const filteredTickets = Tickets.filter(ticket=>TicketStops.includes(ticket.stops))
-		return filteredTickets.map((ticket) => {
+	[
+		TicketsSelector,
+		CurrentCurrencySelector,
+		CurrencyRatesSelector,
+		TicketStopsSelector
+	],
+	(Tickets, CurrentCurrency, CurrencyRates, TicketStops) => {
+		const filteredTickets = Tickets.filter(ticket =>
+			TicketStops.includes(ticket.stops)
+		);
+		return filteredTickets.map(ticket => {
 			const newTicket = { ...ticket };
 			switch (CurrentCurrency) {
 				case CurrencyTypes.EUR:

@@ -26,7 +26,8 @@ const mapStateToProps = (state: RootState) => {
 	);
 	const TransferStops = TicketsSelectors.TicketStopsSelector(state);
 	const CurrentCurrency = TicketsSelectors.CurrentCurrencySelector(state);
-	return { TransfersCount, CurrentCurrency, TransferStops };
+	const MaxTicketStops = TicketsSelectors.MaxTicketStopsSelector(state);
+	return { TransfersCount, CurrentCurrency, TransferStops, MaxTicketStops };
 };
 
 type TmapDispatchToProps = ReturnType<typeof mapDispatchToProps>;
@@ -41,7 +42,8 @@ const AirlineFilters: React.FunctionComponent<TProps> = ({
 	TransfersCount,
 	CurrentCurrency,
 	TicketsActions,
-	TransferStops
+	TransferStops,
+	MaxTicketStops
 }) => {
 	const handleCurrencyChange = (e: React.MouseEvent<HTMLButtonElement>) => {
 		TicketsActions.SetNewCurrency(e.currentTarget.value as TCurrencyTypes);
@@ -50,7 +52,8 @@ const AirlineFilters: React.FunctionComponent<TProps> = ({
 		const stopValue = Number(event.currentTarget.name);
 		TicketsActions.SetTicketStops({
 			stops: stopValue,
-			checked: event.currentTarget.checked
+			checked: event.currentTarget.checked,
+			maxStops: MaxTicketStops
 		});
 	};
 	const handleStopsOnlyClick = (
@@ -60,12 +63,13 @@ const AirlineFilters: React.FunctionComponent<TProps> = ({
 		TicketsActions.SetTicketStops({
 			stops: stopValue,
 			checked: true,
-			only: true
+			only: true,
+			maxStops: MaxTicketStops
 		});
 	};
 	const Transfers: JSX.Element[] = [
 		<StyledCheckbox
-			Checked={TransferStops.length === 5}
+			Checked={TransferStops.length === MaxTicketStops}
 			key="all"
 			onChange={handleStopsChange}
 			onlyButtonClick={handleStopsOnlyClick}
@@ -99,7 +103,7 @@ const AirlineFilters: React.FunctionComponent<TProps> = ({
 		<Card>
 			<div className={Styles["filter-module"]}>
 				<div className={Styles["Upper-header"]}>Валюта</div>
-				<div>
+				<div className={Styles["filter-module-controls"]}>
 					<CurrencyButtonMemo
 						onClick={handleCurrencyChange}
 						active={CurrentCurrency === CurrencyTypes.RUB}
@@ -125,7 +129,7 @@ const AirlineFilters: React.FunctionComponent<TProps> = ({
 			</div>
 			<div className={Styles["filter-module"]}>
 				<div className={Styles["Upper-header"]}>Количество пересадок</div>
-				<div>{Transfers}</div>
+				<div className={Styles["filter-module-checkbox"]}>{Transfers}</div>
 			</div>
 		</Card>
 	);

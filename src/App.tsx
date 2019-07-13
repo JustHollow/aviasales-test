@@ -6,7 +6,16 @@ import { Provider } from "react-redux";
 import AirlineCards from "containers/AirlineCards";
 import AirlineFilters from "containers/AirlineFilters";
 import Styles from "App.module.scss";
+import TicketsJSON from "data/tickets.json";
+import * as TicketsActions from "reducers/tickets/actions";
+import TicketsConstants from "reducers/tickets/constants";
+
 const ReduxStore = CreateStore({});
+
+ReduxStore.dispatch<TicketsActions.TSetNewTickets>({
+	type: TicketsConstants.SetNewTickets,
+	payload: TicketsJSON.tickets
+});
 
 function App() {
 	return (

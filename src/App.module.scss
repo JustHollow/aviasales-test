@@ -1,21 +1,28 @@
 .App {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 100px 1fr 1fr;
+	grid-template-rows: 130px 1fr 1fr;
 	grid-template-areas: ". logo ." "filters tickets tickets" ". tickets tickets";
 }
 
 .logo {
 	grid-area: logo;
+	align-self: end;
+	justify-self: center;
 }
 
 .tickets {
 	grid-area: tickets;
+	display: flex;
+    justify-content: flex-start;
+    padding: 10px 0;
 }
 
 .filters {
 	grid-area: filters;
 	position: sticky;
 	top: 0;
-	max-width: 232px;
+	display: flex;
+	justify-content: flex-end;
+	padding: 10px 0;
 }

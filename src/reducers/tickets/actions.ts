@@ -48,9 +48,9 @@ export const SetNewCurrency = (
 
 export type TTicketStops = {
 	type: TACTIONS_CONSTANTS["SetTicketStops"];
-	payload: {stops:number, checked: boolean,only?:boolean};
+	payload: {stops:number, checked: boolean,only?:boolean,maxStops?:number};
 };
-export const SetTicketStops = ({stops, checked,only=false}:TTicketStops['payload']): TTicketStops => ({
+export const SetTicketStops = ({stops, checked,only=false,maxStops}:TTicketStops['payload']): TTicketStops => ({
 	type: ACTIONS_CONSTANTS.SetTicketStops,
-	payload: {stops,checked,only}
+	payload: {stops,checked,only,maxStops}
 });
